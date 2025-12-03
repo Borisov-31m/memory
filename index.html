@@ -203,7 +203,9 @@
         #password-form button:hover {
             background: #b00000;
         }
-
+        #message-content {
+        display: none;
+        }
         footer {
             background: #d10000;
             color: white;
@@ -414,7 +416,7 @@
         <input type="password" id="password-input" placeholder="Введите пароль">
         <button onclick="checkPassword()">Войти</button>
     </div>
-    <div id="message-content" style="display: none;">
+    <div id="message-content">
         <div class="grid-container">
             <div class="image-container">
                 <img src="https://github.com/Borisov-31m/memory/blob/main/p0.jpg?raw=true" alt="Сообщение 1" class="memory-img">
@@ -521,35 +523,36 @@
     </script>
     <!-- Проверка пароля -->
     <script>
-        function checkPassword() {
-            const passwordInput = document.getElementById('password-input').value;
-            const correctPassword = "157913";
-            const messageContent = document.getElementById('message-content');
-            const passwordForm = document.getElementById('password-form');
+    function checkPassword() {
+        const passwordInput = document.getElementById('password-input').value;
+        const correctPassword = "157913";
+        const messageContent = document.getElementById('message-content');
+        const passwordForm = document.getElementById('password-form');
 
-            if (passwordInput === correctPassword) {
-                passwordForm.style.display = 'none';
-                messageContent.style.display = 'block';
-                localStorage.setItem('messagesAccess', 'true');
-            } else {
-                alert('Неверный пароль! Попробуйте ещё раз.');
-            }
+        if (passwordInput === correctPassword) {
+            passwordForm.style.display = 'none';
+            messageContent.style.display = 'block';
+            localStorage.setItem('messagesAccess', 'true');
+        } else {
+            alert('Неверный пароль! Попробуйте ещё раз.');
         }
+    }
 
-        window.onload = function() {
-            const messageContent = document.getElementById('message-content');
-            const passwordForm = document.getElementById('password-form');
-            if (localStorage.getItem('messagesAccess') === 'true') {
-                passwordForm.style.display = 'none';
-                messageContent.style.display = 'block';
-            } else {
-                passwordForm.style.display = 'block';
-                messageContent.style.display = 'none';
-            }
-        };
-    </script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messageContent = document.getElementById('message-content');
+        const passwordForm = document.getElementById('password-form');
+        if (localStorage.getItem('messagesAccess') === 'true') {
+            passwordForm.style.display = 'none';
+            messageContent.style.display = 'block';
+        } else {
+            passwordForm.style.display = 'block';
+            messageContent.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>
+
 
 
 
