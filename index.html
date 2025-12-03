@@ -274,6 +274,37 @@
             margin-bottom: 15px;
         }
 
+        #password-form {
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+#password-form input {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+#password-form button {
+    padding: 10px 20px;
+    background: #d10000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#password-form button:hover {
+    background: #b00000;
+}
+
         /* Адаптивные стили для мобильных устройств */
         @media (max-width: 768px) {
             .grid-container {
@@ -480,6 +511,11 @@
         <!-- Message секция -->
         <section id="messages" class="section">
             <h2>Расстояние - одно из самых сложных испытаний</h2>
+            <div id="password-form">
+                <p>Этот раздел защищён паролем. Пожалуйста, введите пароль:</p>
+                <input type="password" id="password-input" placeholder="Введите пароль">
+                <button onclick="checkPassword()">Войти</button>
+            </div>
             <div class="grid-container">
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/p0.jpg?raw=true" alt="Сообщение 1" class="memory-img">
@@ -582,7 +618,23 @@
     // Запускаем таймер сразу
     updateCountdown();
 </script>
+    <script>
+    function checkPassword() {
+        const passwordInput = document.getElementById('password-input').value;
+        const correctPassword = "157913"; 
+        const messageContent = document.getElementById('message-content');
+        const passwordForm = document.getElementById('password-form');
+
+        if (passwordInput === correctPassword) {
+            passwordForm.style.display = 'none';
+            messageContent.style.display = 'block';
+        } else {
+            alert('Неверный пароль! Попробуйте ещё раз.');
+        }
+    }
+</script>
 </body>
 </html>
+
 
 
