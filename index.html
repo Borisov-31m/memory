@@ -15,87 +15,87 @@
             background-color: #ffffff;
         }
 
-		.memories-container {
-			display: flex;
-			gap: 30px;
-			align-items: flex-start;
-		}
-		.memories-content {
-			flex: 3;
-			min-width: 0;
-		}
-		.memories-sidebar {
-			flex: 1;
-			min-width: 250px;
-			background-color: #f9f9f9;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-			position: sticky;
-			top: 20px;
-		}
-		.timeline {
-			position: relative;
-			padding-left: 30px;
-			margin: 20px 0;
-		}
-		.timeline::before {
-			content: '';
-			position: absolute;
-			left: 10px;
-			top: 0;
-			bottom: 0;
-			width: 2px;
-			background: #e0e0e0;
-		}
-		.timeline-item {
-			position: relative;
-			margin-bottom: 20px;
-		}
-		.timeline-date {
-			position: absolute;
-			left: -30px;
-			top: 0;
-			width: 60px;
-			text-align: right;
-			font-weight: bold;
-			color: #666;
-			font-size: 0.9em;
-		}
-		.timeline-content {
-			padding: 15px;
-			background: white;
-			border-radius: 5px;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-			transition: transform 0.2s ease;
-		}
-		.timeline-content:hover {
-			transform: translateY(-2px);
-		}
-		.quote-box {
-			margin-top: 30px;
-			padding: 20px;
-			background: #fff;
-			border-left: 4px solid #ff6b6b;
-			font-style: italic;
-			line-height: 1.6;
-		}
-		.quote-author {
-			text-align: right;
-			margin-top: 10px;
-			font-weight: bold;
-			color: #555;
-		}
-		@media (max-width: 768px) {
-			.memories-container {
-				flex-direction: column;
-			}
-			.memories-sidebar {
-				width: 100%;
-				position: static;
-				margin-top: 30px;
-			}
-		}
+        .memories-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .memories-content {
+            flex: 3;
+            min-width: 0;
+        }
+
+        .memories-sidebar {
+            flex: 1;
+            min-width: 250px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 60px;
+            text-align: right;
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .timeline-content {
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-2px);
+        }
+
+        .quote-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff;
+            border-left: 4px solid #ff6b6b;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
 
         header {
             background: #d10000;
@@ -105,6 +105,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             font-family: 'Playfair Display', serif;
         }
+
         nav {
             background: #b00000;
             padding: 18px;
@@ -113,41 +114,47 @@
             z-index: 100;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+
         nav ul {
             padding: 0;
             list-style: none;
             text-align: center;
             margin: 0;
         }
+
         nav li {
             display: inline;
-            margin: 0 25px;
+            margin: 0 10px;
         }
+
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 16px;
             padding: 8px 15px;
             border-radius: 5px;
             transition: all 0.3s ease;
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 1px;
         }
+
         nav a:hover {
             background: #8a0000;
             transform: translateY(-2px);
         }
+
         .container {
-            width: 85%;
-            margin: 40px auto;
+            width: 90%;
+            margin: 20px auto;
             overflow: hidden;
-            padding: 30px;
+            padding: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0,0,0,0.05);
             border: 1px solid #f0f0f0;
         }
+
         footer {
             background: #d10000;
             color: white;
@@ -158,103 +165,123 @@
             font-weight: 300;
             letter-spacing: 1px;
         }
+
         .section {
             display: none;
             animation: fadeIn 0.7s;
         }
+
         .section.active {
             display: block;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .memory-img {
-            max-width: 300px;
+            max-width: 100%;
             height: auto;
             border-radius: 10px;
-            margin: 10px 0;
+            margin: 10px auto;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.4s ease;
             border: 1px solid #f0f0f0;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
+
         .memory-img:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
+
         h1 {
-            font-size: 2.8em;
+            font-size: 2.2em;
             margin: 0;
             letter-spacing: 1px;
         }
+
         h2 {
             color: #d10000;
             border-bottom: 2px solid #ffcccc;
             padding-bottom: 12px;
             font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            margin-top: 30px;
+            font-size: 1.8em;
+            margin-top: 20px;
         }
+
         p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            line-height: 1.8;
+            font-size: 1em;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
-        .image-path {
-            background-color: #fff5f5;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #b00000;
-            display: block;
-            margin: 5px auto;
-            text-align: center;
-            max-width: 300px;
-            word-break: break-all;
-        }
-        .message {
-            background: #fff5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 5px solid #d10000;
-            transition: all 0.3s ease;
-        }
-        .message:hover {
-            transform: translateX(5px);
-        }
-        .message strong {
-            color: #b00000;
-            font-weight: 600;
-        }
-        small {
-            font-size: 0.9em;
-            color: #666;
-            display: block;
-            margin: 10px 0;
-            font-style: italic;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .image-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+
         .caption {
             font-family: 'Playfair Display', serif;
             color: #b00000;
             font-style: italic;
             margin: 5px 0;
             text-align: center;
-            font-size: 1em;
+            font-size: 0.9em;
+        }
+
+        .grid-container {
+            display: grid;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Адаптивные стили для мобильных устройств */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-img {
+                width: 100%;
+                max-height: 250px;
+                object-fit: contain;
+            }
+
+            nav li {
+                margin: 0 5px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .memories-container {
+                flex-direction: column;
+            }
+
+            .memories-sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 20px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+
+        /* Стили для планшетов и ПК */
+        @media (min-width: 769px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .memory-img {
+                max-width: 300px;
+            }
         }
     </style>
 </head>
@@ -262,7 +289,6 @@
     <header>
         <h1>Поздравляю с нашим днём!</h1>
     </header>
-
     <nav>
         <ul>
             <li><a href="#" onclick="showSection('main')">Главная</a></li>
@@ -271,7 +297,6 @@
             <li><a href="#" onclick="showSection('food')">Food</a></li>
         </ul>
     </nav>
-
     <div class="container">
         <!-- Главная секция -->
         <section id="main" class="section active">
@@ -279,235 +304,186 @@
             <p>Этот сайт я создал специально для тебя, чтобы сохранить наши самые тёплые моменты и воспоминания.</p>
             <p>Здесь ты найдёшь фотографии, которые рассказывают нашу историю, наши сообщения и многое другое.</p>
         </section>
-
         <!-- Memories секция -->
         <section id="memories" class="section">
             <h2>Memories</h2>
             <p>Здесь собраны моменты, которые делают нашу историю особенной.</p>
-
-            <div class="grid-container">
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/d29U50AKaUfHcA" alt="Воспоминание 1" class="memory-img">
-                    <p class="caption">Если Лера рыжая - наступила осень</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/1H327bf171J_BA" alt="Воспоминание 2" class="memory-img">
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/7a-NJP_5KEwAag" alt="Воспоминание 3" class="memory-img">
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/mhN_IEwkPg6tfg" alt="Воспоминание 4" class="memory-img">
-                    <p class="caption">Фотки из Pinterest</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/1q-xL2jAODfXUQ" alt="Воспоминание 5" class="memory-img">
-                    <p class="caption">Наша жизнь - сплошной фильм</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/gQ4Z_zDELubAxg" alt="Воспоминание 6" class="memory-img">
-                    <p class="caption">На домашнем и уютном</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/wOVXBoW6RTiEjQ" alt="Воспоминание 7" class="memory-img">
-                    <p class="caption">Лёд не в сердце, а под ногами</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/2GlyA1kG9F_SYg" alt="Воспоминание 8" class="memory-img">
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/RD3NDDOBrs4nSQ" alt="Воспоминание 9" class="memory-img">
-                    <p class="caption">С Новым Годом!</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/RyL6gYcbCSvdfg" alt="Воспоминание 10" class="memory-img">
-                    <p class="caption"></p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/N9HYV2GiZnYrSA" alt="Воспоминание 11" class="memory-img">
-                    <p class="caption">Наши отношения такие же яркие как этот салют</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/-vNHhI_6jfj5lw" alt="Воспоминание 12" class="memory-img">
-                    <p class="caption">Минус один</p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/wYZD4YAcylqOjA" alt="Воспоминание 13" class="memory-img">
-                    <p class="caption"></p>
-                </div>
-
-                <div class="image-container">
-                    <img src="https://disk.yandex.ru/i/-DoBrK0xsO7Jiw" alt="Воспоминание 14" class="memory-img">
-                    <p class="caption"></p>
-                </div>
-            </div>
-
-            <div class="memories-sidebar">
-                <h3>Тут собраны яркие события, которые произошли с нами:</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025</div>
-                        <div class="timeline-content">
-                            <h4>07.07.2025 - др в Сумбулово</h4>
-                            <h4>26.06.2025 - конец первого курса</h4>
-                            <h4>12.05.2025 - Фирсов в армию</h4>
-                            <h4>28.04.2025 - первый совместный поход в зал</h4>
-                            <h4>21.03.2025 - концерт MACANа</h4>
+            <div class="memories-container">
+                <div class="memories-content">
+                    <div class="grid-container">
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/d29U50AKaUfHcA" alt="Воспоминание 1" class="memory-img">
+                            <p class="caption">Если Лера рыжая - наступила осень</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/1H327bf171J_BA" alt="Воспоминание 2" class="memory-img">
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/7a-NJP_5KEwAag" alt="Воспоминание 3" class="memory-img">
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/mhN_IEwkPg6tfg" alt="Воспоминание 4" class="memory-img">
+                            <p class="caption">Фотки из Pinterest</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/1q-xL2jAODfXUQ" alt="Воспоминание 5" class="memory-img">
+                            <p class="caption">Наша жизнь - сплошной фильм</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/gQ4Z_zDELubAxg" alt="Воспоминание 6" class="memory-img">
+                            <p class="caption">На домашнем и уютном</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/wOVXBoW6RTiEjQ" alt="Воспоминание 7" class="memory-img">
+                            <p class="caption">Лёд не в сердце, а под ногами</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/2GlyA1kG9F_SYg" alt="Воспоминание 8" class="memory-img">
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/RD3NDDOBrs4nSQ" alt="Воспоминание 9" class="memory-img">
+                            <p class="caption">С Новым Годом!</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/RyL6gYcbCSvdfg" alt="Воспоминание 10" class="memory-img">
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/N9HYV2GiZnYrSA" alt="Воспоминание 11" class="memory-img">
+                            <p class="caption">Наши отношения такие же яркие как этот салют</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/-vNHhI_6jfj5lw" alt="Воспоминание 12" class="memory-img">
+                            <p class="caption">Минус один</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/wYZD4YAcylqOjA" alt="Воспоминание 13" class="memory-img">
+                        </div>
+                        <div class="image-container">
+                            <img src="https://disk.yandex.ru/i/-DoBrK0xsO7Jiw" alt="Воспоминание 14" class="memory-img">
                         </div>
                     </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024</div>
-                        <div class="timeline-content">
-                            <h4>22.11.2024 - ночевка с Никки</h4>
-                            <h4>11.11.2024 - Кузя в армию</h4>
-                            <h4>17.07.2024 - наша годовщина</h4>
-                            <h4>12.07.2024 - начало совместной жизни</h4>
-                            <h4>30.06.2024 - покупка Киаочки</h4>
-                            <h4>25.06.2024 - выпускной</h4>
-                            <h4>25.05.2024 - последний звонок</h4>
-                            <h4>11.05.2024 - пьянка в моей доме</h4>
-                            <h4>08.06.2024 - прогулка в Зарайске</h4>
-                            <h4>13.04.2024 - твое выступление</h4>
-                            <h4>26.01.2024 - наш первый приготовленный ужин</h4>
-                            <h4>31.12.2024 - Новый Год 2</h4>
-                            <h4>31.05.2024 - мой первый др с тобой</h4>
+                </div>
+                <div class="memories-sidebar">
+                    <h3>Тут собраны яркие события, которые произошли с нами:</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2025</div>
+                            <div class="timeline-content">
+                                <h4>07.07.2025 - др в Сумбулово</h4>
+                                <h4>26.06.2025 - конец первого курса</h4>
+                                <h4>12.05.2025 - Фирсов в армию</h4>
+                                <h4>28.04.2025 - первый совместный поход в зал</h4>
+                                <h4>21.03.2025 - концерт MACANа</h4>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2023</div>
-                        <div class="timeline-content">
-                            <h4>31.12.2023 - Новый Год 1</h4>
-                            <h4>09.12.2023 - Первый раз на катке</h4>
-                            <h4>30.10.2023 - первый снег</h4>
-                            <h4>04.10.2023 - осенняя прогулка в Коломне</h4>
-                            <h4>09.09.2023 - фотки на карьере 😻</h4>
-                            <h4>08.09.2023 - первый поход в кинотеатр</h4>
-                            <h4>27.08.2023 - день города в Луховицах</h4>
-                            <h4>20.08.2023 - первый раз пустила в беседку 🥰</h4>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-content">
+                                <h4>22.11.2024 - ночевка с Никки</h4>
+                                <h4>11.11.2024 - Кузя в армию</h4>
+                                <h4>17.07.2024 - наша годовщина</h4>
+                                <h4>12.07.2024 - начало совместной жизни</h4>
+                                <h4>30.06.2024 - покупка Киаочки</h4>
+                                <h4>25.06.2024 - выпускной</h4>
+                                <h4>25.05.2024 - последний звонок</h4>
+                                <h4>11.05.2024 - пьянка в моей доме</h4>
+                                <h4>08.06.2024 - прогулка в Зарайске</h4>
+                                <h4>13.04.2024 - твое выступление</h4>
+                                <h4>26.01.2024 - наш первый приготовленный ужин</h4>
+                                <h4>31.12.2024 - Новый Год 2</h4>
+                                <h4>31.05.2024 - мой первый др с тобой</h4>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2022</div>
-                        <div class="timeline-content">
-                            <h4>06.05.2022 - первое сообщение</h4>
-                            <p>А Также: 06.05.2022 - ♾️<br>Каждый день с тобой самый яркий для меня</p>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-content">
+                                <h4>31.12.2023 - Новый Год 1</h4>
+                                <h4>09.12.2023 - Первый раз на катке</h4>
+                                <h4>30.10.2023 - первый снег</h4>
+                                <h4>04.10.2023 - осенняя прогулка в Коломне</h4>
+                                <h4>09.09.2023 - фотки на карьере 😻</h4>
+                                <h4>08.09.2023 - первый поход в кинотеатр</h4>
+                                <h4>27.08.2023 - день города в Луховицах</h4>
+                                <h4>20.08.2023 - первый раз пустила в беседку 🥰</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022</div>
+                            <div class="timeline-content">
+                                <h4>06.05.2022 - первое сообщение</h4>
+                                <p>А Также: 06.05.2022 - ♾️<br>Каждый день с тобой самый яркий для меня</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- Message секция -->
         <section id="messages" class="section">
             <h2>Расстояние - одно из самых сложных испытаний</h2>
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/3HnINEV3PAOTyA" alt="Сообщение 1" class="memory-img">
-                <p class="caption"></p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/Fp21mH6Mow40Ig" alt="Сообщение 2" class="memory-img">
-                <p class="caption"></p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/4AZ19KjtBgZesQ" alt="Сообщение 3" class="memory-img">
-                <p class="caption"></p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/zxIbagrDE9YSdw" alt="Сообщение 4" class="memory-img">
-                <p class="caption"></p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/H806K6jyW5IH1A" alt="Сообщение 5" class="memory-img">
-                <p class="caption"></p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/n0cxIsDQDAN_gQ" alt="Сообщение 6" class="memory-img">
-                <p class="caption"></p>
-            </div>
-
-            <div class="image-container">
-                <img src="https://disk.yandex.ru/i/QWl3B0l3CoeFQg" alt="Сообщение 7" class="memory-img">
-                <p class="caption"></p>
+            <div class="grid-container">
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/3HnINEV3PAOTyA" alt="Сообщение 1" class="memory-img">
+                </div>
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/Fp21mH6Mow40Ig" alt="Сообщение 2" class="memory-img">
+                </div>
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/4AZ19KjtBgZesQ" alt="Сообщение 3" class="memory-img">
+                </div>
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/zxIbagrDE9YSdw" alt="Сообщение 4" class="memory-img">
+                </div>
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/H806K6jyW5IH1A" alt="Сообщение 5" class="memory-img">
+                </div>
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/n0cxIsDQDAN_gQ" alt="Сообщение 6" class="memory-img">
+                </div>
+                <div class="image-container">
+                    <img src="https://disk.yandex.ru/i/QWl3B0l3CoeFQg" alt="Сообщение 7" class="memory-img">
+                </div>
             </div>
         </section>
-
         <!-- Food секция -->
         <section id="food" class="section">
+            <h2>Еда</h2>
             <p>Еда - это не просто утолить голод.</p>
             <div class="grid-container">
                 <div class="image-container">
-                    <img src="https://github.com/Borisov-31m/memory/blob/main/f1.jpg?raw=true" alt="Еда 1" class="memory-img" sizes="(max-width: 768px) 100vw, 300px>
-                    <p class="caption"></p>
+                    <img src="https://github.com/Borisov-31m/memory/blob/main/f1.jpg?raw=true" alt="Еда 1" class="memory-img">
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f2.jpg?raw=true" alt="Еда 2" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f3.jpg?raw=true" alt="Еда 3" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f4.jpg?raw=true" alt="Еда 4" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f5.jpg?raw=true" alt="Еда 5" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f6.jpg?raw=true" alt="Еда 6" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f7.jpg?raw=true" alt="Еда 7" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f8.jpg?raw=true" alt="Еда 8" class="memory-img">
-                    <p class="caption"></p>
                 </div>
-
                 <div class="image-container">
                     <img src="https://github.com/Borisov-31m/memory/blob/main/f9.jpg?raw=true" alt="Еда 9" class="memory-img">
-                    <p class="caption"></p>
                 </div>
             </div>
         </section>
     </div>
-
     <footer>
         <p>&copy; 17.07.2025 - Наш особенный день</p>
         <p>С любовью и теплом</p>
     </footer>
-
     <script>
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
@@ -522,5 +498,3 @@
     </script>
 </body>
 </html>
-
-
