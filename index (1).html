@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f5f2">
+<meta name="description" content="Наш маленький мир — фотографии, моменты и слова, которые хочется хранить.">
+<title>Наша история — Наш особенный день</title>
+<!-- Сайт работает как один обычный HTML-файл: все стили и JavaScript находятся внутри него.
+     Фотографии загружаются по прежним ссылкам GitHub. Для новых фото загрузите
+     f10.jpg и f11.jpg в репозиторий Borisov-31m/memory — карточки появятся сами. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #f8f5f2; --paper: #fffdfb; --ink: #30232a; --ink-soft: #766d70;
+    --wine: #482636; --wine-dark: #2c1a2a; --rose: #d98ca0; --rose-deep: #b76680;
+    --line: #eae0df; --card-shadow: 0 20px 60px rgba(62,29,43,.07);
+    --radius-xl: 32px;
+    font-synthesis: none;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin:0; color:var(--ink); background:var(--bg); font-family: "Manrope", "Segoe UI", Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+button { font:inherit; }
+button:focus-visible, a:focus-visible { outline:3px solid #c47591; outline-offset:4px; }
+button, a { -webkit-tap-highlight-color:transparent; }
+::selection { background:#e9b7c5; color:#33202a; }
+.shell { width:min(1200px, calc(100% - 72px)); margin-inline:auto; }
+.topbar { position:sticky; top:0; z-index:50; background:rgba(248,245,242,.88); border-bottom:1px solid rgba(109,65,81,.08); -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); }
+.topbar-inner { min-height:84px; display:flex; align-items:center; gap:26px; justify-content:space-between; }
+.brand { display:flex; align-items:center; gap:12px; flex-shrink:0; color:var(--ink); text-decoration:none; }
+.brand-mark { width:42px; height:42px; display:grid; place-items:center; background:var(--wine); color:#f8cad5; border-radius:14px; font-family:Georgia,serif; font-size:26px; transform:rotate(-8deg); box-shadow:0 5px 18px rgba(58,27,42,.16); }
+.brand-label { display:flex; flex-direction:column; gap:2px; }
+.brand-label strong { font-size:14px; letter-spacing:.02em; font-weight:800; }
+.brand-label small { font-size:10px; letter-spacing:.18em; color:#8c7e82; text-transform:uppercase; font-weight:700; }
+.main-nav { display:flex; gap:5px; padding:5px; background:#efebe7; border:1px solid rgba(103,68,82,.07); border-radius:100px; }
+.nav-button { color:#6b6064; border:0; background:transparent; padding:11px 17px; border-radius:100px; font-size:12px; font-weight:800; line-height:1; white-space:nowrap; cursor:pointer; transition:background .22s, color .22s, box-shadow .22s, transform .22s; }
+.nav-button:hover { color:var(--wine); transform:translateY(-1px); }
+.nav-button.is-active { color:white; background:var(--wine); box-shadow:0 6px 20px rgba(58,27,42,.15); }
+.topbar-date { display:flex; align-items:center; gap:9px; white-space:nowrap; font-size:11px; letter-spacing:.11em; font-weight:800; color:#8f7d84; }
+.topbar-date .dot { width:7px; height:7px; background:var(--rose-deep); border-radius:50%; }
+main { padding-block:36px 100px; min-height:calc(100vh - 205px); }
+.page[hidden] { display:none !important; }
+.page.is-active { animation:page-enter .48s ease both; }
+@keyframes page-enter { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.eyebrow { display:inline-flex; align-items:center; gap:12px; color:#ab778a; font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+.eyebrow::before { content:""; width:25px; height:1px; background:currentColor; }
+.eyebrow.light { color:#e8b2c4; }
+.display { font-family:"Playfair Display",Georgia,serif; font-weight:500; letter-spacing:-.045em; }
+.hero { position:relative; isolation:isolate; overflow:hidden; min-height:590px; border-radius:var(--radius-xl); background:radial-gradient(circle at 80% 18%,rgba(194,111,141,.49),transparent 30%),radial-gradient(circle at 72% 86%,rgba(111,59,95,.65),transparent 35%),linear-gradient(125deg,#352031 10%,#542b43 55%,#3d2235 100%); box-shadow:0 28px 65px rgba(71,35,57,.18); display:grid; grid-template-columns:1.15fr 1fr; gap:24px; align-items:center; padding:76px 65px; }
+.hero::before { content:""; position:absolute; inset:22px; border:1px solid rgba(255,255,255,.09); border-radius:22px; pointer-events:none; }
+.hero::after { content:""; position:absolute; z-index:-1; width:550px; height:550px; border:1px solid rgba(255,235,241,.09); border-radius:50%; right:-110px; top:30px; box-shadow:0 0 0 80px rgba(255,235,241,.025), 0 0 0 165px rgba(255,235,241,.017); pointer-events:none; }
+.hero-content { position:relative; z-index:3; max-width:620px; }
+.hero .display { color:#fff8f8; font-size:clamp(49px,5.3vw,80px); line-height:1.09; margin:24px 0; }
+.hero .display em { font-weight:400; color:#edb2c3; }
+.hero-copy { max-width:445px; color:#e1ccd7; line-height:1.85; font-size:14px; margin:0 0 32px; }
+.hero-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.pill-button { display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:51px; padding:0 24px; border-radius:999px; border:1px solid transparent; cursor:pointer; font-size:12px; font-weight:800; letter-spacing:.015em; transition:transform .22s, background .22s, box-shadow .22s; }
+.pill-button:hover { transform:translateY(-3px); }
+.pill-button.primary { background:#f8e3e6; color:#432436; box-shadow:0 10px 35px rgba(15,8,17,.12); }
+.pill-button.primary:hover { background:white; }
+.pill-button.ghost { background:transparent; border-color:rgba(255,255,255,.24); color:#fff0f5; }
+.pill-button.ghost:hover { background:rgba(255,255,255,.08); }
+.pill-button.dark { background:var(--wine); color:white; }
+.pill-button.dark:hover { background:#67334b; }
+.hero-art { min-height:426px; position:relative; z-index:2; }
+.polaroid { position:absolute; background:#fef8f5; padding:10px 10px 25px; box-shadow:0 24px 50px rgba(16,9,19,.35); border-radius:5px; transition:transform .35s; }
+.polaroid:hover { z-index:5; transform:rotate(0deg) translateY(-12px); }
+.polaroid.one { width:60%; height:310px; left:5%; top:55px; transform:rotate(-11deg); }
+.polaroid.two { width:64%; height:336px; right:0; top:28px; transform:rotate(10deg); }
+.polaroid.one:hover,.polaroid.two:hover { transform:rotate(0) translateY(-12px); }
+.polaroid .media-frame { width:100%; height:100%; border-radius:3px; }
+.polaroid figcaption { font-family:"Playfair Display",Georgia,serif; color:#6d5163; font-size:16px; font-style:italic; text-align:center; margin-top:7px; }
+.polaroid .image-placeholder { background:linear-gradient(145deg,#aa6b86,#5d405b); color:#fff4f5; }
+.art-sticker { position:absolute; z-index:6; right:3%; bottom:9px; width:125px; height:125px; border-radius:50%; background:#e9b4c5; color:#53354c; box-shadow:0 8px 25px rgba(37,20,35,.2); display:grid; align-content:center; justify-content:center; text-align:center; font-size:11px; font-weight:800; letter-spacing:.11em; line-height:1.6; transform:rotate(13deg); }
+.art-sticker span { font-family:Georgia,serif; font-size:30px; line-height:1.1; font-weight:normal; }
+.hero-stars { position:absolute; inset:0; pointer-events:none; color:#f3c9d4; }
+.hero-stars span { position:absolute; font-family:Georgia,serif; }
+.hero-stars span:nth-child(1) { top:13%; right:24%; font-size:31px; }
+.hero-stars span:nth-child(2) { bottom:17%; left:56%; font-size:20px; }
+.hero-stars span:nth-child(3) { top:19%; left:52%; font-size:15px; }
+.heart-scene { position:absolute; z-index:10; inset:0; pointer-events:none; overflow:hidden; }
+.heart-particle { position:absolute; left:50%; top:50%; opacity:0; font-family:Georgia,serif; font-size:25px; line-height:1; color:#f1b5c8; text-shadow:0 1px 6px rgba(255,235,243,.2); animation:heart-flight 1.25s cubic-bezier(.15,.65,.35,1) var(--delay,0ms) forwards; }
+@keyframes heart-flight { 0% { opacity:0; transform:translate(-50%,-50%) scale(.45) rotate(0deg); } 13% { opacity:1; } 72% { opacity:1; } 100% { opacity:0; transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(var(--scale,1.2)) rotate(var(--rotation)); } }
+.hero.celebrating { animation:hero-glow .65s ease; }
+@keyframes hero-glow { 50% { box-shadow:0 28px 70px rgba(192,87,127,.42); } }
+.countdown-panel { display:grid; grid-template-columns:1fr 1.3fr; gap:46px; align-items:center; padding:48px 50px; margin-top:23px; background:var(--paper); border:1px solid var(--line); border-radius:27px; box-shadow:var(--card-shadow); }
+.countdown-intro h2 { margin:14px 0 9px; font:500 clamp(29px,3vw,42px)/1.2 "Playfair Display",Georgia,serif; letter-spacing:-.03em; }
+.countdown-intro p { margin:0; color:var(--ink-soft); font-size:12px; line-height:1.8; }
+.countdown-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.time-tile { padding:21px 7px 17px; min-width:0; text-align:center; border-radius:17px; background:#f7f1ef; border:1px solid #f0e7e4; }
+.time-tile strong { display:block; color:var(--wine); font-size:clamp(25px,3vw,42px); line-height:1.2; font-weight:600; letter-spacing:-.075em; font-variant-numeric:tabular-nums; }
+.time-tile span { display:block; margin-top:7px; color:#92838b; font-size:10px; font-weight:800; letter-spacing:.065em; }
+.afterword { display:flex; gap:26px; align-items:center; justify-content:space-between; margin-top:22px; padding:24px 30px; color:#8b7980; font-size:13px; }
+.afterword .script { color:#a46e84; font:italic 26px "Playfair Display",Georgia,serif; }
+.section-intro { position:relative; display:flex; align-items:end; justify-content:space-between; gap:24px; padding:35px 0 40px; }
+.section-intro h1 { margin:16px 0 12px; max-width:780px; font-size:clamp(40px,5.3vw,72px); line-height:1.11; }
+.section-intro h1 em { color:var(--rose-deep); font-weight:400; }
+.section-intro p { margin:0; max-width:650px; color:var(--ink-soft); line-height:1.8; font-size:14px; }
+.section-index { flex-shrink:0; color:#c9b8bf; font:500 17px "Playfair Display",Georgia,serif; letter-spacing:.06em; padding-bottom:8px; }
+.memories-layout { display:grid; grid-template-columns:minmax(0,1.38fr) minmax(300px,.88fr); align-items:start; gap:24px; }
+.gallery { columns:2; column-gap:17px; }
+.photo-card { width:100%; display:block; break-inside:avoid; margin:0 0 17px; padding:9px; text-align:left; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--paper); cursor:pointer; box-shadow:0 6px 22px rgba(53,22,38,.035); transition:transform .3s, box-shadow .3s; }
+.photo-card:hover { transform:translateY(-5px); box-shadow:0 18px 37px rgba(65,31,48,.12); }
+.media-frame { position:relative; isolation:isolate; display:block; width:100%; aspect-ratio:4/5; background:#ead9dc; overflow:hidden; border-radius:11px; }
+.media-frame img { position:absolute; z-index:2; inset:0; width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .4s ease,transform .65s ease; }
+.media-frame img.is-loaded { opacity:1; }
+.photo-card:hover .media-frame img.is-loaded { transform:scale(1.055); }
+.image-placeholder { position:absolute; z-index:1; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:18px; background:radial-gradient(circle at 75% 15%,rgba(255,255,255,.4),transparent 40%),linear-gradient(150deg,#e5c7ce,#cba7b5); color:#714b5d; text-align:center; }
+.placeholder-symbol { font-size:52px; font-family:Georgia,serif; font-weight:400; line-height:1; opacity:.62; }
+.image-placeholder strong { font-family:"Playfair Display",Georgia,serif; font-size:18px; font-weight:500; }
+.image-placeholder small { max-width:210px; font-size:10px; font-weight:700; opacity:.76; letter-spacing:.03em; line-height:1.55; }
+.image-zoom { position:absolute; z-index:4; top:11px; right:11px; width:33px; height:33px; display:grid; place-items:center; border-radius:50%; color:var(--ink); background:rgba(255,255,255,.85); font-size:16px; opacity:0; transform:translateY(6px); transition:.2s; }
+.photo-card:hover .image-zoom { opacity:1; transform:translateY(0); }
+.photo-meta { display:flex; gap:14px; align-items:flex-start; justify-content:space-between; min-height:47px; padding:13px 7px 5px; }
+.photo-name { font-size:11px; line-height:1.6; font-weight:700; color:#574651; }
+.photo-number { color:#b7a5ab; font-size:10px; font-weight:700; white-space:nowrap; padding-top:3px; }
+.gallery .photo-card:nth-child(5n+2) .media-frame { aspect-ratio:1/1; }
+.gallery .photo-card:nth-child(7n+5) .media-frame { aspect-ratio:5/6; }
+.timeline-panel { background:var(--paper); border:1px solid var(--line); border-radius:23px; padding:29px 27px 16px; box-shadow:var(--card-shadow); }
+.timeline-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:23px; }
+.timeline-top h3 { font-family:"Playfair Display",Georgia,serif; font-size:26px; margin:0; font-weight:500; }
+.timeline-top span { font-size:10px; font-weight:800; letter-spacing:.14em; color:#b28d9d; }
+.timeline { border-left:1px solid #e9d7de; margin-left:9px; padding-left:22px; }
+.year-block { position:relative; padding-bottom:27px; }
+.year-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+.timeline-dot { position:absolute; left:-29px; top:11px; width:11px; height:11px; border-radius:50%; border:3px solid var(--paper); outline:1px solid #d8a2b4; background:#c17995; }
+.year-heading h4 { margin:0; color:var(--wine); font:600 29px "Playfair Display",Georgia,serif; letter-spacing:-.03em; }
+.year-count { font-size:10px; white-space:nowrap; color:#a7979e; font-weight:700; }
+.timeline-events { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px; }
+.timeline-event { display:grid; grid-template-columns:50px 1fr; gap:8px; align-items:start; }
+.timeline-event time { color:#b77491; font-size:11px; font-weight:800; line-height:1.5; }
+.timeline-event span { color:#786b71; font-size:11px; line-height:1.6; }
+.timeline-note { margin:13px 0 0; padding:12px 14px; border-radius:12px; background:#f9f0f2; color:#885b71; font-size:11px; line-height:1.7; }
+.message-layout { display:grid; grid-template-columns:.75fr 1.25fr; gap:22px; min-height:450px; }
+.message-art { position:relative; min-height:480px; overflow:hidden; border-radius:25px; padding:38px; background:radial-gradient(circle at 48% 40%,#87506c,#48293f 45%,#2e2131 95%); display:flex; flex-direction:column; justify-content:space-between; color:#f6d7df; }
+.message-art::before { position:absolute; inset:15%; content:""; border:1px solid rgba(255,230,240,.13); border-radius:50%; box-shadow:0 0 0 62px rgba(250,207,224,.035),0 0 0 123px rgba(250,207,224,.025); }
+.message-art .heart-illustration { position:relative; z-index:1; align-self:center; font-family:Georgia,serif; font-size:clamp(120px,19vw,218px); line-height:1; color:#f1bdcc; text-shadow:0 22px 60px rgba(9,2,11,.23); transform:rotate(-8deg); }
+.message-art .art-top, .message-art .art-bottom { position:relative; z-index:1; font-size:11px; letter-spacing:.2em; font-weight:800; text-transform:uppercase; }
+.message-art .art-bottom { text-align:right; }
+.letter { background:var(--paper); border:1px solid var(--line); border-radius:25px; padding:clamp(28px,5vw,70px); box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:center; }
+.letter .mini { color:#b37a90; font-size:11px; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+.letter h3 { font:500 clamp(32px,4vw,56px)/1.15 "Playfair Display",Georgia,serif; letter-spacing:-.035em; margin:22px 0 23px; }
+.letter h3 em { color:var(--rose-deep); }
+.letter p { color:#74666e; max-width:550px; font-size:14px; line-height:2; margin:0 0 17px; }
+.letter-signature { margin-top:24px; font:italic 25px "Playfair Display",Georgia,serif; color:#a56c84; }
+.food-gallery { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:17px; }
+.food-gallery .photo-card { margin:0; }
+.food-gallery .photo-card .media-frame { aspect-ratio:5/4; }
+.food-gallery .photo-card:nth-child(4n+2) .media-frame { aspect-ratio:1/1; }
+.food-gallery .photo-card:nth-child(4n+3) .media-frame { aspect-ratio:5/4; }
+.food-gallery .photo-card .photo-meta { min-height:40px; }
+.food-gallery .photo-card.is-new { border:1px dashed #c998ac; }
+.food-gallery .photo-card.is-new .image-placeholder { background:radial-gradient(circle at center,rgba(255,255,255,.62),transparent 50%), repeating-linear-gradient(45deg,#eadce0,#eadce0 11px,#f4e9eb 11px,#f4e9eb 22px); }
+.food-endnote { padding:40px 0 0; text-align:center; color:#9d8a94; font:italic 25px "Playfair Display",Georgia,serif; }
+.site-footer { border-top:1px solid var(--line); background:#f4efeb; }
+.footer-inner { min-height:105px; display:flex; gap:20px; align-items:center; justify-content:space-between; }
+.footer-inner strong { font:500 22px "Playfair Display",Georgia,serif; color:var(--wine); }
+.footer-inner small { display:block; color:#95858c; font-size:11px; padding-top:4px; }
+.footer-heart { font-family:Georgia,serif; font-size:28px; color:#c78ca4; }
+.photo-dialog { border:0; background:transparent; padding:0; max-width:min(92vw,1000px); max-height:94vh; overflow:visible; color:white; }
+.photo-dialog::backdrop { background:rgba(25,15,25,.86); backdrop-filter:blur(10px); }
+.lightbox-inner { position:relative; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.lightbox-inner img { max-width:min(90vw,950px); max-height:78vh; object-fit:contain; border:8px solid rgba(255,255,255,.95); border-radius:12px; box-shadow:0 15px 75px rgba(0,0,0,.32); }
+.lightbox-caption { margin:0; color:#f4e7eb; font-size:13px; text-align:center; }
+.lightbox-close { position:absolute; z-index:2; right:-14px; top:-15px; background:white; border:0; border-radius:50%; height:40px; width:40px; font-size:25px; line-height:1; cursor:pointer; color:#4d3041; }
+@media (max-width:1080px) {
+   .topbar-date { display:none; }
+   .hero { padding:60px 45px; min-height:545px; }
+   .hero .display { font-size:clamp(48px,5.8vw,68px); }
+   .memories-layout { grid-template-columns:minmax(0,1.1fr) minmax(278px,.9fr); }
+   .timeline-panel { padding:24px 19px 10px; }
+}
+@media (max-width:790px) {
+   .shell { width:min(100% - 36px,700px); }
+   .topbar-inner { padding-block:12px; min-height:unset; flex-direction:column; align-items:stretch; gap:12px; }
+   .brand { justify-content:center; }
+   .main-nav { justify-content:space-between; align-self:center; width:min(100%,500px); }
+   .nav-button { padding:12px 15px; flex:1; }
+   main { padding-block:19px 60px; }
+   .hero { grid-template-columns:1fr; gap:4px; min-height:0; padding:46px 36px 42px; }
+   .hero .display { max-width:620px; font-size:clamp(48px,8vw,76px); }
+   .hero-copy { max-width:600px; }
+   .hero-art { width:min(100%,500px); margin-inline:auto; min-height:350px; }
+   .polaroid.one { height:275px; top:35px; left:10%; }
+   .polaroid.two { height:300px; top:13px; right:6%; }
+   .art-sticker { bottom:-4px; right:8%; }
+   .countdown-panel { grid-template-columns:1fr; gap:27px; padding:34px 30px; }
+   .memories-layout { grid-template-columns:1fr; }
+   .message-layout { grid-template-columns:1fr; }
+   .message-art { min-height:250px; }
+   .message-art .heart-illustration { font-size:135px; }
+   .food-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:480px) {
+   .shell { width:calc(100% - 26px); }
+   .brand { transform:scale(.94); }
+   .nav-button { padding:11px 10px; font-size:11px; }
+   .main-nav { gap:1px; padding:4px; }
+   .hero { border-radius:22px; padding:43px 24px 22px; }
+   .hero::before { inset:10px; border-radius:16px; }
+   .hero .display { font-size:clamp(41px,12vw,56px); margin-block:21px; }
+   .hero-copy { font-size:12px; line-height:1.9; }
+   .hero-actions { gap:9px; }
+   .pill-button { padding:0 17px; min-height:45px; font-size:11px; }
+   .hero-art { min-height:285px; }
+   .polaroid.one { height:215px; top:30px; left:9%; }
+   .polaroid.two { height:225px; top:24px; right:2%; }
+   .polaroid { padding:7px 7px 21px; }
+   .polaroid figcaption { font-size:13px; }
+   .art-sticker { width:96px; height:96px; font-size:8px; right:1%; bottom:0; }
+   .art-sticker span { font-size:25px; }
+   .countdown-panel { padding:28px 17px; gap:20px; border-radius:21px; }
+   .countdown-grid { gap:7px; }
+   .time-tile { padding:17px 2px 13px; border-radius:12px; }
+   .time-tile strong { font-size:clamp(23px,7vw,34px); }
+   .time-tile span { font-size:8px; }
+   .afterword { flex-direction:column; gap:4px; padding:23px 12px; text-align:center; }
+   .section-intro { padding-block:23px 29px; }
+   .section-intro h1 { font-size:clamp(39px,10vw,53px); }
+   .section-intro p { font-size:12px; }
+   .section-index { display:none; }
+   .gallery { column-gap:10px; }
+   .photo-card { padding:6px; border-radius:13px; margin-bottom:10px; }
+   .media-frame { border-radius:8px; }
+   .photo-meta { min-height:40px; padding:9px 4px 4px; }
+   .photo-name { font-size:9px; }
+   .photo-number { font-size:8px; }
+   .food-gallery { gap:10px; }
+   .food-gallery .photo-card .media-frame { aspect-ratio:3/4; }
+   .food-gallery .photo-card:nth-child(4n+2) .media-frame { aspect-ratio:3/4; }
+   .placeholder-symbol { font-size:33px; }
+   .image-placeholder strong { font-size:14px; }
+   .image-placeholder small { font-size:9px; }
+   .letter { padding:27px 24px; }
+   .letter p { font-size:13px; }
+   .message-art { min-height:200px; padding:25px; }
+   .message-art .heart-illustration { font-size:96px; }
+   .footer-inner { padding-block:22px; }
+   .footer-inner strong { font-size:19px; }
+   .footer-heart { font-size:24px; }
+}
+@media (prefers-reduced-motion:reduce) {
+    *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner shell">
+    <a href="#main" class="brand" id="brand-home" aria-label="На главную">
+      <span class="brand-mark" aria-hidden="true">♥</span>
+      <span class="brand-label"><strong>Наша история</strong><small>just you & me</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Разделы сайта">
+      <button class="nav-button is-active" type="button" data-section="main" aria-current="page">Главная</button>
+      <button class="nav-button" type="button" data-section="memories">Memories</button>
+      <button class="nav-button" type="button" data-section="messages">Message</button>
+      <button class="nav-button" type="button" data-section="food">Food</button>
+    </nav>
+    <div class="topbar-date"><span class="dot"></span> SINCE 17.07.2023</div>
+  </div>
+</header>
+<main class="shell" id="content">
+  <section id="main" class="page is-active" aria-labelledby="home-title">
+    <div class="hero" id="hero">
+       <div class="heart-scene" id="heart-scene" aria-hidden="true"></div>
+       <div class="hero-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>✳</span></div>
+       <div class="hero-content">
+          <span class="eyebrow light">17 июля 2023 · начало нашей истории</span>
+          <h1 class="display" id="home-title">Самая красивая история — <em>наша.</em></h1>
+          <p class="hero-copy">Этот сайт я создал специально для тебя, чтобы сохранить наши самые тёплые моменты. Здесь живут наши фотографии, воспоминания и маленькие истории, из которых складывается что-то большое.</p>
+          <div class="hero-actions">
+             <button class="pill-button primary" type="button" data-section="memories">Смотреть воспоминания <span aria-hidden="true">↗</span></button>
+             <button class="pill-button ghost" id="surprise-button" type="button">Нажми на сердечко <span aria-hidden="true">♡</span></button>
+          </div>
+       </div>
+       <div class="hero-art" aria-hidden="true">
+          <figure class="polaroid one"><span class="media-frame"><span class="image-placeholder"><span class="placeholder-symbol">♥</span><strong>Наши мгновения</strong></span><img src="https://github.com/Borisov-31m/memory/blob/main/photo_4.jpg?raw=true" alt="" decoding="async"></span><figcaption>our moments</figcaption></figure>
+          <figure class="polaroid two"><span class="media-frame"><span class="image-placeholder"><span class="placeholder-symbol">✧</span><strong>Наша история</strong></span><img src="https://github.com/Borisov-31m/memory/blob/main/photo_8.jpg?raw=true" alt="" decoding="async"></span><figcaption>forever & always</figcaption></figure>
+          <div class="art-sticker">YOU & ME<span>♡</span> 17 / 07</div>
+       </div>
+    </div>
+    <section class="countdown-panel" aria-labelledby="count-title">
+      <div class="countdown-intro"><span class="eyebrow">Каждая секунда важна</span><h2 id="count-title">Мы вместе уже...</h2><p>Считаем каждый день с 17 июля 2023 года, 01:24.</p></div>
+      <div class="countdown-grid" id="countdown" aria-label="Время вместе">
+        <div class="time-tile"><strong id="days">0</strong><span>ДНЕЙ</span></div>
+        <div class="time-tile"><strong id="hours">00</strong><span>ЧАСОВ</span></div>
+        <div class="time-tile"><strong id="minutes">00</strong><span>МИНУТ</span></div>
+        <div class="time-tile"><strong id="seconds">00</strong><span>СЕКУНД</span></div>
+      </div>
+    </section>
+    <div class="afterword"><span>Каждый день с тобой — самый яркий для меня.</span><span class="script">Our little universe ♡</span></div>
+  </section>
+
+  <section id="memories" class="page" hidden aria-labelledby="memories-title">
+    <div class="section-intro"><div><span class="eyebrow">Глава 01 · Наши моменты</span><h1 class="display" id="memories-title">Моменты, которые <em>остаются.</em></h1><p>Фотографии, в которых можно снова прожить самые тёплые дни. И маленькая хронология нашей большой истории.</p></div><span class="section-index">01 / 03</span></div>
+    <div class="memories-layout">
+       <div class="gallery" aria-label="Фотогалерея воспоминаний">
+          <button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_1.jpg?raw=true" data-photo-label="Если Лера рыжая - наступила осень" aria-label="Открыть фото: Если Лера рыжая - наступила осень">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_1.jpg?raw=true" alt="Если Лера рыжая - наступила осень" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Если Лера рыжая - наступила осень</span><span class="photo-number">01 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_2.jpg?raw=true" data-photo-label="Кадр 02" aria-label="Открыть фото: Кадр 02">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_2.jpg?raw=true" alt="Кадр 02" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name"></span><span class="photo-number">02 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_3.jpg?raw=true" data-photo-label="Кадр 03" aria-label="Открыть фото: Кадр 03">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_3.jpg?raw=true" alt="Кадр 03" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name"></span><span class="photo-number">03 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_5.jpg?raw=true" data-photo-label="Фотки из Pinterest" aria-label="Открыть фото: Фотки из Pinterest">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_5.jpg?raw=true" alt="Фотки из Pinterest" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фотки из Pinterest</span><span class="photo-number">04 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_4.jpg?raw=true" data-photo-label="Наша жизнь - сплошной фильм" aria-label="Открыть фото: Наша жизнь - сплошной фильм">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_4.jpg?raw=true" alt="Наша жизнь - сплошной фильм" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Наша жизнь - сплошной фильм</span><span class="photo-number">05 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_7.jpg?raw=true" data-photo-label="На домашнем и уютном" aria-label="Открыть фото: На домашнем и уютном">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_7.jpg?raw=true" alt="На домашнем и уютном" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">На домашнем и уютном</span><span class="photo-number">06 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_6.jpg?raw=true" data-photo-label="Лёд не в сердце, а под ногами" aria-label="Открыть фото: Лёд не в сердце, а под ногами">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_6.jpg?raw=true" alt="Лёд не в сердце, а под ногами" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Лёд не в сердце, а под ногами</span><span class="photo-number">07 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_13.jpg?raw=true" data-photo-label="Кадр 08" aria-label="Открыть фото: Кадр 08">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_13.jpg?raw=true" alt="Кадр 08" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name"></span><span class="photo-number">08 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_8.jpg?raw=true" data-photo-label="С Новым Годом!" aria-label="Открыть фото: С Новым Годом!">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_8.jpg?raw=true" alt="С Новым Годом!" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">С Новым Годом!</span><span class="photo-number">09 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_9.jpg?raw=true" data-photo-label="Кадр 10" aria-label="Открыть фото: Кадр 10">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_9.jpg?raw=true" alt="Кадр 10" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name"></span><span class="photo-number">10 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_10.jpg?raw=true" data-photo-label="Наши отношения такие же яркие как этот салют" aria-label="Открыть фото: Наши отношения такие же яркие как этот салют">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_10.jpg?raw=true" alt="Наши отношения такие же яркие как этот салют" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Наши отношения такие же яркие как этот салют</span><span class="photo-number">11 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_14.jpg?raw=true" data-photo-label="Минус один" aria-label="Открыть фото: Минус один">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_14.jpg?raw=true" alt="Минус один" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Минус один</span><span class="photo-number">12 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_11.jpg?raw=true" data-photo-label="Кадр 13" aria-label="Открыть фото: Кадр 13">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_11.jpg?raw=true" alt="Кадр 13" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name"></span><span class="photo-number">13 / 14</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/photo_12.jpg?raw=true" data-photo-label="Кадр 14" aria-label="Открыть фото: Кадр 14">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Наш момент</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/photo_12.jpg?raw=true" alt="Кадр 14" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name"></span><span class="photo-number">14 / 14</span></span>
+    </button>
+       </div>
+       <aside class="timeline-panel" aria-label="Хронология событий">
+         <div class="timeline-top"><h3>Наша хронология</h3><span>2022 — 2026</span></div>
+         <div class="timeline"><article class="year-block" aria-label="2026 год">
+      <div class="year-heading"><span class="timeline-dot"></span><h4>2026</h4><span class="year-count">01 момент</span></div>
+      <ol class="timeline-events"><li class="timeline-event"><time datetime="2026-10-08">03.09</time><span>Концерт Акмаля</span></li></ol>
+    </article>
+<article class="year-block" aria-label="2025 год">
+      <div class="year-heading"><span class="timeline-dot"></span><h4>2025</h4><span class="year-count">05 событий</span></div>
+      <ol class="timeline-events"><li class="timeline-event"><time datetime="2025-07-07">07.07</time><span>Др в Сумбулово</span></li>
+<li class="timeline-event"><time datetime="2025-06-26">26.06</time><span>Конец первого курса</span></li>
+<li class="timeline-event"><time datetime="2025-05-12">12.05</time><span>Фирсов в армию</span></li>
+<li class="timeline-event"><time datetime="2025-04-28">28.04</time><span>Первый совместный поход в зал</span></li>
+<li class="timeline-event"><time datetime="2025-03-21">21.03</time><span>Концерт MACANа</span></li></ol>
+    </article>
+<article class="year-block" aria-label="2024 год">
+      <div class="year-heading"><span class="timeline-dot"></span><h4>2024</h4><span class="year-count">13 событий</span></div>
+      <ol class="timeline-events"><li class="timeline-event"><time datetime="2024-12-31">31.12</time><span>Новый Год 2</span></li>
+<li class="timeline-event"><time datetime="2024-11-22">22.11</time><span>Ночевка с Никки</span></li>
+<li class="timeline-event"><time datetime="2024-11-11">11.11</time><span>Кузя в армию</span></li>
+<li class="timeline-event"><time datetime="2024-07-17">17.07</time><span>Наша годовщина</span></li>
+<li class="timeline-event"><time datetime="2024-07-12">12.07</time><span>Начало совместной жизни</span></li>
+<li class="timeline-event"><time datetime="2024-06-30">30.06</time><span>Покупка Киаочки</span></li>
+<li class="timeline-event"><time datetime="2024-06-25">25.06</time><span>Выпускной</span></li>
+<li class="timeline-event"><time datetime="2024-06-08">08.06</time><span>Прогулка в Зарайске</span></li>
+<li class="timeline-event"><time datetime="2024-05-31">31.05</time><span>Мой первый др с тобой</span></li>
+<li class="timeline-event"><time datetime="2024-05-25">25.05</time><span>Последний звонок</span></li>
+<li class="timeline-event"><time datetime="2024-05-11">11.05</time><span>Пьянка в моей доме</span></li>
+<li class="timeline-event"><time datetime="2024-04-13">13.04</time><span>Твое выступление</span></li>
+<li class="timeline-event"><time datetime="2024-01-26">26.01</time><span>Наш первый приготовленный ужин</span></li></ol>
+    </article>
+<article class="year-block" aria-label="2023 год">
+      <div class="year-heading"><span class="timeline-dot"></span><h4>2023</h4><span class="year-count">09 событий</span></div>
+      <ol class="timeline-events"><li class="timeline-event"><time datetime="2023-12-31">31.12</time><span>Новый Год 1</span></li>
+<li class="timeline-event"><time datetime="2023-12-09">09.12</time><span>Первый раз на катке</span></li>
+<li class="timeline-event"><time datetime="2023-10-30">30.10</time><span>Первый снег</span></li>
+<li class="timeline-event"><time datetime="2023-10-04">04.10</time><span>Осенняя прогулка в Коломне</span></li>
+<li class="timeline-event"><time datetime="2023-09-09">09.09</time><span>Фотосессия на карьере 😻</span></li>
+<li class="timeline-event"><time datetime="2023-09-08">08.09</time><span>Первый поход в кинотеатр</span></li>
+<li class="timeline-event"><time datetime="2023-08-27">27.08</time><span>День города в Луховицах</span></li>
+<li class="timeline-event"><time datetime="2023-08-20">20.08</time><span>Первый раз пустила в беседку 🥰</span></li>
+<li class="timeline-event"><time datetime="2023-07-21">21.07</time><span>Первый поцелуй</span></li></ol>
+    </article>
+<article class="year-block" aria-label="2022 год">
+      <div class="year-heading"><span class="timeline-dot"></span><h4>2022</h4><span class="year-count">01 момент</span></div>
+      <ol class="timeline-events"><li class="timeline-event"><time datetime="2022-05-06">06.05</time><span>первое сообщение</span></li></ol><p class="timeline-note">06.05.2022 - ♾️ Каждый день с тобой самый яркий для меня</p>
+    </article>
+</div>
+       </aside>
+    </div>
+  </section>
+
+  <section id="messages" class="page" hidden aria-labelledby="message-title">
+    <div class="section-intro"><div><span class="eyebrow">Глава 02 · Слова от сердца</span><h1 class="display" id="message-title">Расстояние — <em>не преграда.</em></h1><p>Расстояние — одно из самых сложных испытаний. Но важные слова всегда находят дорогу.</p></div><span class="section-index">02 / 03</span></div>
+    <div class="message-layout" id="message-content">
+       <div class="message-art" aria-hidden="true"><span class="art-top">Love, always</span><span class="heart-illustration">♡</span><span class="art-bottom">No distance is too far</span></div>
+       <article class="letter"><span class="mini">Письмо только для тебя</span><h3>Есть вещи сильнее <em>расстояния.</em></h3><p>Даже если нас разделяют километры, наши воспоминания, разговоры и всё то, что делает нас «нами», всегда остаются рядом.</p><p>Пусть здесь живут слова, которые хочется говорить тебе снова и снова. И пусть впереди будет ещё больше моментов, которые мы сохраним вместе.</p><div class="letter-signature">С любовью, всегда ♡</div></article>
+    </div>
+  </section>
+
+  <section id="food" class="page" hidden aria-labelledby="food-title">
+    <div class="section-intro"><div><span class="eyebrow">Глава 03 · Наши вкусные моменты</span><h1 class="display" id="food-title">Вкус наших <em>воспоминаний.</em></h1><p>Еда — это не просто утолить голод. Это уютные вечера, случайные находки и моменты, которыми хочется делиться.</p></div><span class="section-index">03 / 03</span></div>
+    <div class="food-gallery" aria-label="Наши фотографии еды">
+      <button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f1.jpg?raw=true" data-photo-label="Наш вкусный момент 01" aria-label="Открыть фото: Наш вкусный момент 01">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 01</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f1.jpg?raw=true" alt="Наш вкусный момент 01" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 01</span><span class="photo-number">01 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f2.jpg?raw=true" data-photo-label="Наш вкусный момент 02" aria-label="Открыть фото: Наш вкусный момент 02">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 02</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f2.jpg?raw=true" alt="Наш вкусный момент 02" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 02</span><span class="photo-number">02 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f3.jpg?raw=true" data-photo-label="Наш вкусный момент 03" aria-label="Открыть фото: Наш вкусный момент 03">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 03</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f3.jpg?raw=true" alt="Наш вкусный момент 03" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 03</span><span class="photo-number">03 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f4.jpg?raw=true" data-photo-label="Наш вкусный момент 04" aria-label="Открыть фото: Наш вкусный момент 04">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 04</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f4.jpg?raw=true" alt="Наш вкусный момент 04" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 04</span><span class="photo-number">04 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f5.jpg?raw=true" data-photo-label="Наш вкусный момент 05" aria-label="Открыть фото: Наш вкусный момент 05">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 05</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f5.jpg?raw=true" alt="Наш вкусный момент 05" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 05</span><span class="photo-number">05 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f6.jpg?raw=true" data-photo-label="Наш вкусный момент 06" aria-label="Открыть фото: Наш вкусный момент 06">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 06</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f6.jpg?raw=true" alt="Наш вкусный момент 06" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 06</span><span class="photo-number">06 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f7.jpg?raw=true" data-photo-label="Наш вкусный момент 07" aria-label="Открыть фото: Наш вкусный момент 07">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 07</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f7.jpg?raw=true" alt="Наш вкусный момент 07" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 07</span><span class="photo-number">07 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f8.jpg?raw=true" data-photo-label="Наш вкусный момент 08" aria-label="Открыть фото: Наш вкусный момент 08">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 08</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f8.jpg?raw=true" alt="Наш вкусный момент 08" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 08</span><span class="photo-number">08 / 11</span></span>
+    </button>
+<button class="photo-card" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f9.jpg?raw=true" data-photo-label="Наш вкусный момент 09" aria-label="Открыть фото: Наш вкусный момент 09">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>Фото 09</strong><small>Фотография пока не загрузилась</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f9.jpg?raw=true" alt="Наш вкусный момент 09" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 09</span><span class="photo-number">09 / 11</span></span>
+    </button>
+<button class="photo-card is-new" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f10.jpg?raw=true" data-photo-label="Наш вкусный момент 10" aria-label="Открыть фото: Наш вкусный момент 10">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>f10.jpg</strong><small>Место для нового фото</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f10.jpg?raw=true" alt="Наш вкусный момент 10" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 10</span><span class="photo-number">10 / 11</span></span>
+    </button>
+<button class="photo-card is-new" type="button" data-photo-src="https://github.com/Borisov-31m/memory/blob/main/f11.jpg?raw=true" data-photo-label="Наш вкусный момент 11" aria-label="Открыть фото: Наш вкусный момент 11">
+       <span class="media-frame" aria-hidden="true">
+         <span class="image-placeholder"><span class="placeholder-symbol">✳</span><strong>f11.jpg</strong><small>Место для нового фото</small></span>
+         <img src="https://github.com/Borisov-31m/memory/blob/main/f11.jpg?raw=true" alt="Наш вкусный момент 11" loading="lazy" decoding="async">
+         <span class="image-zoom">↗</span>
+       </span>
+       <span class="photo-meta"><span class="photo-name">Фото 11</span><span class="photo-number">11 / 11</span></span>
+    </button>
+    </div>
+    <p class="food-endnote">The best moments are shared ♡</p>
+  </section>
+</main>
+<footer class="site-footer"><div class="footer-inner shell"><div><strong>Наш особенный день.</strong><small>С 17.07.2023 · И впереди ещё столько всего</small></div><span class="footer-heart" aria-label="С любовью">♡</span></div></footer>
+
+<dialog class="photo-dialog" id="photo-dialog" aria-label="Просмотр фотографии"><div class="lightbox-inner"><button class="lightbox-close" type="button" id="close-dialog" aria-label="Закрыть фото">×</button><img id="lightbox-image" alt=""><p class="lightbox-caption" id="lightbox-caption"></p></div></dialog>
+<script>
+(function () {
+  'use strict';
+  // This is plain browser JavaScript: works with file://, no server or libraries.
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const navButtons = Array.from(document.querySelectorAll('.main-nav .nav-button'));
+  const hero = document.getElementById('hero');
+  const heartScene = document.getElementById('heart-scene');
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function heartBurst() {
+    if (reduceMotion) return;
+    const glyphs = ['♥', '♡', '✦', '✧'];
+    for (let i = 0; i < 27; i++) {
+      const particle = document.createElement('span');
+      const angle = (i / 27) * Math.PI * 2 + Math.random() * 0.3;
+      const distance = 105 + Math.random() * 240;
+      particle.className = 'heart-particle';
+      particle.textContent = glyphs[i % glyphs.length];
+      particle.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+      particle.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
+      particle.style.setProperty('--rotation', `${Math.round(Math.random() * 120 - 60)}deg`);
+      particle.style.setProperty('--scale', `${(0.85 + Math.random() * 1.25).toFixed(2)}`);
+      particle.style.setProperty('--delay', `${Math.round(Math.random() * 180)}ms`);
+      particle.style.fontSize = `${17 + Math.floor(Math.random() * 20)}px`;
+      heartScene.appendChild(particle);
+      particle.addEventListener('animationend', () => particle.remove(), { once: true });
+    }
+    hero.classList.remove('celebrating');
+    void hero.offsetWidth;
+    hero.classList.add('celebrating');
+    window.setTimeout(() => hero.classList.remove('celebrating'), 750);
+  }
+
+  function showSection(sectionId, burstOnHome) {
+    const selectedPage = document.getElementById(sectionId);
+    if (!selectedPage || !selectedPage.classList.contains('page')) return;
+    pages.forEach(page => {
+      const selected = page === selectedPage;
+      page.hidden = !selected;
+      page.classList.toggle('is-active', selected);
+    });
+    navButtons.forEach(button => {
+      const selected = button.dataset.section === sectionId;
+      button.classList.toggle('is-active', selected);
+      if (selected) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
+    if (sectionId === 'main' && burstOnHome) {
+      window.requestAnimationFrame(() => window.setTimeout(heartBurst, 90));
+    }
+  }
+
+  document.querySelectorAll('[data-section]').forEach(button => {
+    button.addEventListener('click', () => showSection(button.dataset.section, button.dataset.section === 'main'));
+  });
+  document.getElementById('brand-home').addEventListener('click', event => {
+    event.preventDefault(); showSection('main', true);
+  });
+  document.getElementById('surprise-button').addEventListener('click', heartBurst);
+
+  // Local device time, starting from the original date in the supplied site.
+  const startDate = new Date(2023, 6, 17, 1, 24, 0);
+  const timeElements = ['days','hours','minutes','seconds'].map(id => document.getElementById(id));
+  function updateCountdown() {
+    const totalSeconds = Math.max(0, Math.floor((Date.now() - startDate.getTime()) / 1000));
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor(totalSeconds / 3600) % 24;
+    const minutes = Math.floor(totalSeconds / 60) % 60;
+    const seconds = totalSeconds % 60;
+    [days, hours, minutes, seconds].forEach((value,index) => {
+      timeElements[index].textContent = index === 0 ? String(value) : String(value).padStart(2,'0');
+    });
+  }
+  updateCountdown();
+  window.setInterval(updateCountdown, 1000);
+
+  // Show a styled placeholder if a remote picture is not available yet.
+  document.querySelectorAll('.media-frame img').forEach(img => {
+    const markLoaded = () => img.classList.add('is-loaded');
+    if (img.complete && img.naturalWidth > 0) markLoaded();
+    else img.addEventListener('load', markLoaded, { once: true });
+    img.addEventListener('error', () => { img.classList.remove('is-loaded'); }, { once: true });
+  });
+
+  // Image viewer (native browser dialog), optional; safe for local files.
+  const dialog = document.getElementById('photo-dialog');
+  const largeImage = document.getElementById('lightbox-image');
+  const caption = document.getElementById('lightbox-caption');
+  document.querySelectorAll('.photo-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const image = card.querySelector('img');
+      if (!image || !image.naturalWidth) return; // Do not open empty f10/f11 placeholders.
+      largeImage.src = card.dataset.photoSrc;
+      largeImage.alt = card.dataset.photoLabel;
+      caption.textContent = card.dataset.photoLabel;
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+    });
+  });
+  document.getElementById('close-dialog').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+})();
+</script>
+</body>
+</html>
